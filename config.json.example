@@ -1,0 +1,9 @@
+{
+  "bot_token": "token",
+  "bot_prefix": ";",
+  "test_guilds": [
+    "server_ids"
+  ],
+  "development": false,
+  "random_stuff_api_key": "Random Stuff API Key"
+}

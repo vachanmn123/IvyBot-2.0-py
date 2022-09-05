@@ -11,11 +11,23 @@ class Rating(Enum):
 
 
 class TruthOrDare(commands.Cog):
+    """Truth or Dare commands"""
+
     def __init__(self, bot):
+        """constructor for the TruthOrDare class
+
+        Args:
+            bot (disnake.ext.commands.Bot): The bot instance
+        """
         self.bot = bot
 
     @commands.slash_command(name="truthordare")
     async def truthordare(self, ctx):
+        """The truthordare command group
+
+        Args:
+            ctx (disnake.ApplicationCommandInteraction): The Interaction object
+        """
         pass
 
     @truthordare.sub_command(name="truth", description="Sends a truth question")
@@ -25,7 +37,9 @@ class TruthOrDare(commands.Cog):
         Args:
             ctx (disnake.Interaction): interaction object
         """
+        # Get a random truth question
         question = await TruthOrDareFunc.get_truth(rating)
+        # Make the embed
         emb = disnake.Embed(
             color=disnake.Color.green(),
             title="Truth",
@@ -34,6 +48,10 @@ class TruthOrDare(commands.Cog):
         )
         emb.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar.url)
         emb.set_footer(text=f"Rating: {question['rating']}")
+        # Update the database about the usage stats.
+        await self.bot.db.commands.update_one(
+            {"category": "truthordare", "command": "truth"}, {"$inc": {"uses": 1}}
+        )
         return await ctx.send(embed=emb)
 
     @truthordare.sub_command(name="dare", description="Sends a dare")
@@ -43,7 +61,9 @@ class TruthOrDare(commands.Cog):
         Args:
             ctx (disnake.Interaction): interaction object
         """
+        # Get a random dare
         question = await TruthOrDareFunc.get_dare(rating)
+        # Make the embed
         emb = disnake.Embed(
             color=disnake.Color.green(),
             title="Dare",
@@ -52,6 +72,10 @@ class TruthOrDare(commands.Cog):
         )
         emb.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar.url)
         emb.set_footer(text=f"Rating: {question['rating']}")
+        # Update the database about the usage stats.
+        await self.bot.db.commands.update_one(
+            {"category": "truthordare", "command": "dare"}, {"$inc": {"uses": 1}}
+        )
         return await ctx.send(embed=emb)
 
     @truthordare.sub_command(
@@ -63,7 +87,9 @@ class TruthOrDare(commands.Cog):
         Args:
             ctx (disnake.Interaction): interaction object
         """
+        # Get a random Never Have I ever question
         question = await TruthOrDareFunc.get_neverHaveIEver(rating)
+        # Make the embed
         emb = disnake.Embed(
             color=disnake.Color.green(),
             title="Never Have I ever",
@@ -72,6 +98,10 @@ class TruthOrDare(commands.Cog):
         )
         emb.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar.url)
         emb.set_footer(text=f"Rating: {question['rating']}")
+        # Update the database about the usage stats.
+        await self.bot.db.commands.update_one(
+            {"category": "truthordare", "command": "nhie"}, {"$inc": {"uses": 1}}
+        )
         return await ctx.send(embed=emb)
 
     @truthordare.sub_command(
@@ -83,7 +113,9 @@ class TruthOrDare(commands.Cog):
         Args:
             ctx (disnake.Interaction): interaction object
         """
+        # Get a random Would You Rather question
         question = await TruthOrDareFunc.get_wouldYouRather(rating)
+        # Make the embed
         emb = disnake.Embed(
             color=disnake.Color.green(),
             title="Would You Rather",
@@ -92,6 +124,10 @@ class TruthOrDare(commands.Cog):
         )
         emb.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar.url)
         emb.set_footer(text=f"Rating: {question['rating']}")
+        # Update the database about the usage stats.
+        await self.bot.db.commands.update_one(
+            {"category": "truthordare", "command": "wyr"}, {"$inc": {"uses": 1}}
+        )
         return await ctx.send(embed=emb)
 
     @truthordare.sub_command(name="paranoia", description="Sends a Paranoia question")
@@ -101,7 +137,9 @@ class TruthOrDare(commands.Cog):
         Args:
             ctx (disnake.Interaction): interaction object
         """
+        # Get a random Paranoia question
         question = await TruthOrDareFunc.get_neverHaveIEver(rating)
+        # Make the embed
         emb = disnake.Embed(
             color=disnake.Color.green(),
             title="Paranoia",
@@ -110,11 +148,22 @@ class TruthOrDare(commands.Cog):
         )
         emb.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar.url)
         emb.set_footer(text=f"Rating: {question['rating']}")
+        # Update the database about the usage stats.
+        await self.bot.db.commands.update_one(
+            {"category": "truthordare", "command": "paranoia"}, {"$inc": {"uses": 1}}
+        )
         return await ctx.send(embed=emb)
 
 
 def setup(bot):
-    """Loads the cog"""
+    """The setup function for the cog
+
+    Args:
+        bot (disnake.ext.commands.Bot): The bot instance
+
+    Returns:
+        disnake.ext.commands.Bot: The bot instance
+    """
     bot.add_cog(TruthOrDare(bot))
     bot.logger.info("TruthOrDare cog loaded")
     return bot

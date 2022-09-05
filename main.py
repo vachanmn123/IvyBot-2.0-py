@@ -1,15 +1,10 @@
-from cProfile import label
 from datetime import datetime
-import encodings
-from multiprocessing.connection import wait
-from os import sync
 import os
-from unicodedata import name
-from disnake import Intents
 import disnake
 from disnake.ext import commands
 import json
 import logging
+from motor import motor_asyncio
 
 # Setup bot client
 intents = disnake.Intents.default()
@@ -45,10 +40,20 @@ logger.addHandler(handler)
 logger.addHandler(consoleHandler)
 bot.logger = logger
 
+try:
+    # try to load the database
+    bot.db = motor_asyncio.AsyncIOMotorClient(
+        json.load(open("config.json"))["mongodb_uri"]
+    )["IvyBot-2+0"]
+except Exception as e:
+    # if it fails, log it and stop the bot.
+    bot.logger.error(f"Failed to connect to MongoDB: {e}")
+    raise SystemExit(1)
+
 
 @bot.event
 async def on_ready():
-    """prints bot is running"""
+    """prints bot is running and set the bot status"""
     bot.logger.info(f"Logged in as {bot.user.name}({bot.user.id})")
     activity = disnake.Activity(
         type=disnake.ActivityType.watching,
@@ -59,6 +64,7 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
+    """The help command"""
     return await ctx.reply("Press `/` on your keyboard to see a list of commands.")
 
 

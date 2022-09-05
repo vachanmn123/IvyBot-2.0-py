@@ -1,7 +1,7 @@
 import requests
 
 
-async def get_truth(rating: str):
+async def get_truth(rating: str) -> dict[str, str]:
     """Get a truth question from the API
 
     Args:
@@ -14,7 +14,7 @@ async def get_truth(rating: str):
     return res.json()
 
 
-async def get_dare(rating: str):
+async def get_dare(rating: str) -> dict[str, str]:
     """Get a dare from the API
 
     Args:
@@ -27,7 +27,7 @@ async def get_dare(rating: str):
     return res.json()
 
 
-async def get_neverHaveIEver(rating: str):
+async def get_neverHaveIEver(rating: str) -> dict[str, str]:
     """Get a never have I ever from the API
 
     Args:
@@ -40,7 +40,7 @@ async def get_neverHaveIEver(rating: str):
     return res.json()
 
 
-async def get_paranoia(rating: str):
+async def get_paranoia(rating: str) -> dict[str, str]:
     """Get a paranoia question from the API
 
     Args:
@@ -53,7 +53,7 @@ async def get_paranoia(rating: str):
     return res.json()
 
 
-async def get_wouldYouRather(rating: str):
+async def get_wouldYouRather(rating: str) -> dict[str, str]:
     """Get a would you rather question from the API
 
     Args:

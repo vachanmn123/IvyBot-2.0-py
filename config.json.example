@@ -1,5 +1,6 @@
 {
   "bot_token": "token",
+  "mongodb_uri": "",
   "bot_prefix": ";",
   "test_guilds": [
     "server_ids"

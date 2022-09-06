@@ -13,19 +13,24 @@ Documentation shall be added soon!
 To run the bot, follow the steps below
 
 1. install the requirements:
-```
-$ pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
 ```
 
 2. Edit the config files:
+```bash
+cp config.json.example config.json
+nano config.json
 ```
-$ cp config.json.example config.json
-$ nano config.json
+
+3. Make a new folder called data in the bot directory.
+```bash
+mkdir data
 ```
 
 3. Run the bot:
-```
-$ python3 main.py
+```bash
+python3 main.py
 ```
 
 ## Contributing

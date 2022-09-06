@@ -30,7 +30,7 @@ class Games(commands.Cog):
         self.logger = bot.logger
         self.together_control = disnake_together.DisnakeTogether(bot)
 
-    @commands.slash_command(name="games")
+    @commands.slash_command(name="games", description="The games command group")
     async def games(self, ctx):
         """The games command group
 
@@ -44,7 +44,7 @@ class Games(commands.Cog):
         """Starts a game together
 
         Args:
-            ctx (disnake.Interaction): interaction object
+            ctx (disnake.ApplicationCommandInteraction): interaction object
             game (Together_Options): game to play
         """
         vc = None

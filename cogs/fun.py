@@ -39,7 +39,7 @@ class Fun(commands.Cog):
         # Check the user input against all joke tags
         return [tag for tag in all_joke_tags if user_input.lower() in tag]
 
-    @commands.slash_command(name="fun")
+    @commands.slash_command(name="fun", description="The fun command group")
     async def fun(self, ctx):
         """The fun command group
 

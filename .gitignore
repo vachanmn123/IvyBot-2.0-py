@@ -161,3 +161,4 @@ cython_debug/
 logs
 .vscode
 config.json
+data/realbooru_tags.json

@@ -21,7 +21,9 @@ class TruthOrDare(commands.Cog):
         """
         self.bot = bot
 
-    @commands.slash_command(name="truthordare")
+    @commands.slash_command(
+        name="truthordare", description="The truth or dare command group"
+    )
     async def truthordare(self, ctx):
         """The truthordare command group
 

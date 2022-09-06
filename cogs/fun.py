@@ -37,7 +37,7 @@ class Fun(commands.Cog):
             list: list of autocomplete options
         """
         # Check the user input against all joke tags
-        return [tag for tag in all_joke_tags if user_input.lower() in tag]
+        return [tag for tag in all_joke_tags if user_input.lower() in tag][:25]
 
     @commands.slash_command(name="fun", description="The fun command group")
     async def fun(self, ctx):

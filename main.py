@@ -9,7 +9,6 @@ from motor import motor_asyncio
 # Setup bot client
 intents = disnake.Intents.default()
 intents.message_content = True
-intents.members = True
 
 bot = commands.Bot(
     command_prefix=json.load(open("config.json"))["bot_prefix"],

@@ -15,6 +15,7 @@ bot = commands.Bot(
     intents=intents,
     test_guilds=json.load(open("config.json"))["test_guilds"],
     help_command=None,
+    sync_commands=True,
 )
 
 # Setup logging
@@ -59,6 +60,12 @@ async def on_ready():
         name=f"{len(bot.guilds)} servers",
     )
     await bot.change_presence(activity=activity)
+
+
+@bot.event
+async def on_guild_join(guild):
+    """updates the bot status when the bot joins a new guild"""
+    bot.logger.info(f"Joined {guild.name}({guild.id}). Total guilds: {len(bot.guilds)}")
 
 
 @bot.command()

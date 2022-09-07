@@ -7,6 +7,8 @@ from functions.RandomStuffApiFunc import (
     get_random_meme,
 )
 from datetime import datetime
+import requests
+
 
 # Make a list of all the joke tags when the bot starts.
 all_joke_tags = get_all_joke_tags()
@@ -132,6 +134,26 @@ class Fun(commands.Cog):
             {"category": "fun", "command": "meme"}, {"$inc": {"uses": 1}}
         )
         await ctx.send(embed=emb)
+
+    @fun.sub_command(name="apod", description="Astronomy Picture of the Day")
+    async def apod(self, inter: disnake.ApplicationCommandInteraction):
+        """Get the Astronomy Picture of the Day
+
+        Args:
+            inter (disnake.ApplicationCommandInteraction): The Interaction object
+        """
+        # Get the APOD
+        url = f"https://api.nasa.gov/planetary/apod?api_key={self.bot.config['apod_api_key']}"
+        apod = requests.get(url).json()
+        # Make the embed.
+        emb = disnake.Embed(title=apod["title"], url=apod["url"], color=0x00FF00)
+        emb.set_image(url=apod["hdurl"])
+        emb.description = apod["explanation"]
+        # Update the database about the usage stats.
+        await self.bot.db.commands.update_one(
+            {"category": "fun", "command": "apod"}, {"$inc": {"uses": 1}}
+        )
+        await inter.send(embed=emb)
 
 
 def setup(bot):

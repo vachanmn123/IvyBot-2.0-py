@@ -6,5 +6,6 @@
     "server_ids"
   ],
   "development": false,
-  "random_stuff_api_key": "Random Stuff API Key"
+  "random_stuff_api_key": "Random Stuff API Key",
+  "apod_api_key": "NASA API Key"
 }

@@ -18,6 +18,8 @@ bot = commands.Bot(
     sync_commands=True,
 )
 
+bot.config = json.load(open("config.json"))
+
 # Setup logging
 logger = logging.getLogger("disnake")
 if json.load(open("config.json"))["development"]:

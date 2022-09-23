@@ -71,7 +71,7 @@ class NSFW(commands.Cog):
             return await ctx.send("No results found")
         emb = disnake.Embed(title="Realbooru", color=0x00FF00, description=resp["tags"])
         # make the link
-        link = f"https://realbooru.com//images/{resp['directory']}/{resp['image']}"
+        link = f"https://realbooru.com//images/{resp['image'][0:2]}/{resp['image'][2:4]}/{resp['image']}"
         # Update the database with usage stats
         self.bot.db.commands.update_one(
             {"category": "nsfw", "command": "realbooru"}, {"$inc": {"uses": 1}}
